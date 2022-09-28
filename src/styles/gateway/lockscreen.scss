@@ -1,0 +1,33 @@
+@import "../colors.scss";
+
+
+
+.lockscreen-form-container{
+    height: 400px;
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 60px 100px 100px 100px;
+
+    border: 1px solid $gray900;
+    border-radius: 10px;
+    
+    background: $primaryColor;
+
+    .header{
+        font-size: 18px;
+    }
+
+    form{
+        height: 70px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
