@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { registerUser } from "../../utils/users";
 import withNav from "../common/with_nav";
 
@@ -19,7 +19,8 @@ class Register extends React.Component{
 
     handleSubmit(e){
         e.preventDefault();
-        registerUser(this.state)
+        const { email, password } = this.state;
+        registerUser({ email, password })
             .then((response) => {
                 console.log(response);
                 if(this.state.errorMessage !== ""){
@@ -49,24 +50,26 @@ class Register extends React.Component{
             return <Navigate to="/home"/>
         }else{
             return (
-                <div className="register-form">
-                    <p>Register</p>
-                    <form onSubmit={this.handleSubmit}>
+                <div className="register-form-container">
+                    <p>Register!</p>
+                    <form className="register-form" onSubmit={this.handleSubmit}>
                         <input
+                            autoFocus
                             type="text"
                             placeholder="Email"
                             value={this.state.email}
                             onChange={this.onChange("email")}>
                         </input>
                         <input
-                            type="text"
+                            type="password"
                             placeholder="Password"
                             value={this.state.password}
                             onChange={this.onChange("password")}>
                         </input>
                         <input type="submit"></input>
-                        <p>{this.state.errorMessage}</p>
+                        <p id="error-message">{this.state.errorMessage}</p>
                     </form>
+                    <Link to={"/gateway/login"}>Go to login form here</Link>
                 </div>
             )
         }

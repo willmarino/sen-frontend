@@ -2,23 +2,57 @@
 
 *{
     box-sizing: border-box;
+    transition: all .3s;
+}
+
+p{
+    font-family: 'Noto Sans Mono';
+}
+
+a{
+    color: black;
+    font-family: 'Noto Sans Mono';
 }
 
 input[type=text]{
-    width: 125px;
-    height: 25px;
+    width: 160px;
+    height: 35px;
 
     border: 1px solid $gray900;
     border-radius: 4px;
 
     padding: 0px 10px;
+    
+    box-shadow: 0 0 1px $gray900;
 
-    background: #F5F5F5;
+    font-family: 'Noto Sans Mono';
+    background: $gray000;
+
+    &:hover{
+        background: white;
+        box-shadow: 0 0 2px $gray900;
+    }
+
+    &:focus{
+        background: white;
+        box-shadow: 0 0 2px $gray900;
+    }
+
+    &.error{
+        animation: shake 0.2s ease-in-out 0s 2;
+        box-shadow: 0 0 0.5em $errorRed;
+    }
+
+    &.error-out{
+        box-shadow: 0 0 0.5em $errorRed;
+    }
+
+
 }
 
 input[type=submit]{
     width: 125px;
-    height: 25px;
+    height: 30px;
 
     border: 1px solid black;
     border-radius: 4px;
@@ -26,5 +60,59 @@ input[type=submit]{
     padding: 0px 10px;
 
     color: $gray100;
-    background: $gray1000;
+    font-family: 'Noto Sans Mono';
+    background: $gray900;
+
+    &:hover{
+        cursor: pointer;
+        background: $gray800;
+    }
 }
+
+input[type=password]{
+    width: 160px;
+    height: 35px;
+
+    border: 1px solid $gray900;
+    border-radius: 4px;
+
+    padding: 0px 10px;
+    
+    box-shadow: 0 0 1px $gray900;
+
+    font-family: 'Noto Sans Mono';
+    background: $gray000;
+
+    &:hover{
+        background: white;
+        box-shadow: 0 0 2px $gray900;
+    }
+
+    &:focus{
+        background: white;
+        box-shadow: 0 0 2px $gray900;
+    }
+
+    &.error{
+        animation: shake 0.2s ease-in-out 0s 2;
+        box-shadow: 0 0 0.5em $errorRed;
+    }
+
+    &.error-out{
+        box-shadow: 0 0 0.5em $errorRed;
+    }
+
+
+}
+
+input::placeholder{
+    font-family: 'Noto Sans Mono';
+}
+
+
+@keyframes shake {
+    0% { margin-left: 0rem; }
+    25% { margin-left: 0.5rem; }
+    75% { margin-left: -0.5rem; }
+    100% { margin-left: 0rem; }
+  }

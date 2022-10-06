@@ -8,3 +8,11 @@ export const registerUser = async (userInput) => {
         password: userInput.password,
     });
 }
+
+export const loginUser = async (userInput) => {
+    console.log(process.env.REACT_APP_BACKEND_URI);
+    return axios.post(`${process.env.REACT_APP_BACKEND_URI}/users/login`, {
+        email: userInput.email,
+        password: userInput.password,
+    });
+}

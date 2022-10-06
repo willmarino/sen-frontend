@@ -9,18 +9,29 @@ class Lockscreen extends React.Component{
         this.state = {
             password: "",
             passwordError: "",
+            passwordInputClassName: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
 
 
-    handleSubmit(){
+    handleSubmit(e){
+        e.preventDefault();
         if(this.state.password === "abc"){
             window.localStorage.setItem("lockscreenPassed", true);
             this.props.navigate("/login");
         }else{
-            this.setState({ passwordError: "Incorrect Password" });
+            this.setState({
+                passwordError: "Incorrect Password",
+                passwordInputClassName: "error"
+            }, () => {
+                setTimeout(() => {
+                    this.setState({
+                        passwordInputClassName: "error-out"
+                    })
+                }, 1000)
+            });
         }
     }
 
@@ -34,15 +45,22 @@ class Lockscreen extends React.Component{
 
     render(){
         if(localStorage.getItem("lockscreenPassed")){
-            return <Navigate to="/gateway/login"/>
+            return <Navigate to="/gateway/login"/>;
         }else if(localStorage.getItem("userJWT")){
-            return <Navigate to="/home"/>
+            return <Navigate to="/home"/>;
         }else{
             return (
                 <div className="lockscreen-form-container">
                     <p className="header">Enter the passcode</p>
                     <form onSubmit={this.handleSubmit}>
-                        <input type="text" placeholder="Enter Passphrase" value={this.state.password} onChange={this.onChange("password")}></input>
+                        <input
+                            autoFocus
+                            type="password"
+                            placeholder="Enter Passphrase"
+                            value={this.state.password}
+                            onChange={this.onChange("password")}
+                            className={this.state.passwordInputClassName}>
+                        </input>
                         <input type="submit"></input>
                     </form>
                 </div>

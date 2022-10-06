@@ -1,8 +1,7 @@
 @import "../colors.scss";
 
 
-
-.lockscreen-form-container{
+.login-form-container{
     height: 400px;
     width: 400px;
 
@@ -11,18 +10,29 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: 60px 100px 180px 100px;
+    padding: 60px 100px 80px 100px;
 
     .header{
         font-size: 18px;
     }
 
     form{
-        height: 80px;
+        height: 160px;
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+
+        #error-message{
+
+            height: 15px;
+            color: $errorRed;
+            font-size: 12px;
+        }
+    }
+
+    a{
+        font-size: 14px;
     }
 }
