@@ -1,27 +1,20 @@
 import React from "react";
-import {
-    BrowserRouter as Router,
-} from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./user/home";
 import Gateway from "./gateway/gateway";
 
 
 
 const App = () => {
-
-    let component;
-    if(window.localStorage.userData){
-        component = <Home/>;
-    }else{
-        component = <Gateway/>;
-    }
-
     return (
-        <Router>
-            <div className="app-container">
-                {component}
-            </div>
-        </Router>
+        <div className="app-container">
+            <Routes>
+                {/* <Route path="*" element={<Gateway/>}/> */}
+                <Route path="*" element={<Navigate to="/gateway/lockscreen"/>}/>
+                <Route path="/gateway/*" element={<Gateway/>}/>
+                <Route path="/home" element={<Home/>}/>
+            </Routes>
+        </div>
     );
 
 }

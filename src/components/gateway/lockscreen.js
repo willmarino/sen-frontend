@@ -1,4 +1,6 @@
 import React from "react";
+import { Navigate } from "react-router";
+import withNav from "../common/with_nav";
 
 
 class Lockscreen extends React.Component{
@@ -9,35 +11,44 @@ class Lockscreen extends React.Component{
             passwordError: "",
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
+
 
     handleSubmit(){
         if(this.state.password === "abc"){
             window.localStorage.setItem("lockscreenPassed", true);
+            this.props.navigate("/login");
         }else{
             this.setState({ passwordError: "Incorrect Password" });
         }
     }
 
-    onChangePassword(stateKey){
+
+    onChange(stateKey){
         return (e) => {
             this.setState({ [stateKey]: e.currentTarget.value });
         }
     }
 
+
     render(){
-        return (
-            <div className="lockscreen-form-container">
-                <p className="header">Enter the passcode</p>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Enter Passphrase" value={this.state.password} onChange={this.onChangePassword("password")}></input>
-                    <input type="submit"></input>
-                </form>
-                <p></p>
-            </div>
-        )
+        if(localStorage.getItem("lockscreenPassed")){
+            return <Navigate to="/gateway/login"/>
+        }else if(localStorage.getItem("userJWT")){
+            return <Navigate to="/home"/>
+        }else{
+            return (
+                <div className="lockscreen-form-container">
+                    <p className="header">Enter the passcode</p>
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="text" placeholder="Enter Passphrase" value={this.state.password} onChange={this.onChange("password")}></input>
+                        <input type="submit"></input>
+                    </form>
+                </div>
+            )
+        }
     }
 }
 
-export default Lockscreen;
+export default withNav(Lockscreen);
