@@ -13,28 +13,38 @@ class Login extends React.Component{
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.validateInputs = this.validateInputs.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
     }
 
     handleSubmit(e){
         e.preventDefault();
         const { email, password } = this.state;
-        loginUser({ email, password })
-            .then((response) => {
-                console.log(response);
-                if(this.state.errorMessage !== ""){
-                    this.setState({ errorMessage: "" });
-                }
-                window.localStorage.setItem("userJWT", response.data);
-                this.props.navigate("/home");
-            })
-            .catch((err) => {
-                console.log(err);
-                if(err.response){
-                    this.setState({ errorMessage: err.response.data.message });
-                }else{
-                    this.setState({ errorMessage: err.message });
-                }
-            })
+        const validationErrorMessages = this.validateInputs();
+        if(validationErrorMessages.length === 0){
+            console.log("Validation passed");
+            loginUser({ email, password })
+                .then((response) => {
+                    console.log(response);
+                    if(this.state.errorMessage !== ""){
+                        this.setState({ errorMessage: "" });
+                    }
+                    window.localStorage.setItem("userJWT", response.data);
+                    this.props.navigate("/home");
+                })
+                .catch((err) => {
+                    console.log(err);
+                    if(err.response){
+                        this.setState({ errorMessage: err.response.data.message });
+                    }else{
+                        this.setState({ errorMessage: err.message });
+                    }
+                })
+        }else{
+            console.log("Validation failed");
+            this.setState({ errorMessage: validationErrorMessages[0] });
+        }
     }
 
     onChange(stateKey){
@@ -45,16 +55,31 @@ class Login extends React.Component{
 
 
     validateInputs(){
-
+        const emailErrors = this.validateEmail();
+        const passwordErrors = this.validatePassword();
+        return [ ...emailErrors, ...passwordErrors ];
     }
 
-
     validateEmail(){
-
+        const { email } = this.state;
+        const errors = [];
+        if(!email.includes("@")){
+            errors.push("Invalid email address");
+        }else{
+            if(!email.split("@")[1].includes("mail")){
+                errors.push("Invalid email address");
+            }
+        }
+        return errors;
     }
 
     validatePassword(){
-
+        const { password } = this.state;
+        const errors = [];
+        if(password.length < 5){
+            errors.push("Password length must be greater than 5");
+        }
+        return errors;
     }
 
 
