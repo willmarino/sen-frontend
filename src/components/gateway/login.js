@@ -29,7 +29,11 @@ class Login extends React.Component{
             })
             .catch((err) => {
                 console.log(err);
-                this.setState({ errorMessage: err.response.data.message });
+                if(err.response){
+                    this.setState({ errorMessage: err.response.data.message });
+                }else{
+                    this.setState({ errorMessage: err.message });
+                }
             })
     }
 
@@ -37,6 +41,20 @@ class Login extends React.Component{
         return (e) => {
             this.setState({ [stateKey]: e.currentTarget.value });
         }
+    }
+
+
+    validateInputs(){
+
+    }
+
+
+    validateEmail(){
+
+    }
+
+    validatePassword(){
+
     }
 
 
