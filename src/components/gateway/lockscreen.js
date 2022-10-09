@@ -47,7 +47,7 @@ class Lockscreen extends React.Component{
         if(localStorage.getItem("lockscreenPassed")){
             return <Navigate to="/gateway/login"/>;
         }else if(localStorage.getItem("userJWT")){
-            return <Navigate to="/home"/>;
+            return <Navigate to="/main/alerts"/>;
         }else{
             return (
                 <div className="lockscreen-form-container">

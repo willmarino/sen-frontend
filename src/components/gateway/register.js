@@ -34,7 +34,7 @@ class Register extends React.Component{
                         this.setState({ errorMessage: "" });
                     }
                     window.localStorage.setItem("userJWT", response.data);
-                    this.props.navigate("/home");
+                    this.props.navigate("/main/alerts");
                 })
                 .catch((err) => {
                     console.log(err);
@@ -90,7 +90,7 @@ class Register extends React.Component{
         if(!localStorage.getItem("lockscreenPassed")){
             return <Navigate to="/gateway/lockscreen"/>
         }else if(localStorage.getItem("userJWT")){
-            return <Navigate to="/home"/>
+            return <Navigate to="/main/alerts"/>
         }else{
             return (
                 <div className="register-form-container">

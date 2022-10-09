@@ -1,0 +1,52 @@
+@import "../colors.scss";
+
+
+.user-header{
+    width: 60%;
+    min-width: 300px;
+    height: 7vh;
+    min-height: 45px;
+
+
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 0px 0px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px $gray800;
+
+    background: $gray800;
+
+    div{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logout-button{
+        width: 15%;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        &:hover{
+            cursor: pointer;
+            background: $gray900;
+        }
+
+        p{
+            margin: 0px 20px;
+        }
+    }
+
+    p{
+        font-size: 13px;
+        color: white;
+    }
+}
